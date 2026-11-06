@@ -1,0 +1,1038 @@
+@import "tailwindcss";
+@source "../**/*.{ts,tsx,js,jsx}";
+
+@theme {
+  --font-sans: var(--font-open-sans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-open-sans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Minimal Light Base Colors (From user reference image: 04 Minimal Light - Clean & Professional) */
+  --color-ink: #1F2937;
+  --color-paper: #F5F7FA;
+  --color-mist: #E8F2EC;
+  --color-sand: #edf3ef;
+
+  /* Government Green Accent & Harmonic Scale */
+  --color-pine-50: #f4f8f5;
+  --color-pine-100: #E8F2EC; /* Secondary Soft Sage Mint */
+  --color-pine-200: #cbe3d3;
+  --color-pine-300: #9fcbb0;
+  --color-pine-400: #5ea878;
+  --color-pine-500: #388e3c;
+  --color-pine-600: #2E7D32; /* Accent Green from reference */
+  --color-pine-700: #236327;
+  --color-pine-800: #1b4f20;
+  --color-pine-900: #143d18;
+  --color-pine-950: #0d2810;
+
+  /* Official Prestige Gold / Brass Accents */
+  --color-gold-200: #fef3c7;
+  --color-gold-300: #fde68a;
+  --color-gold-400: #d4af37;
+  --color-gold-500: #b89325;
+
+  /* Minimal Light Clean & Professional Shadows */
+  --shadow-soft: 0 1px 3px rgb(31 41 55 / 0.05), 0 14px 35px -18px rgb(31 41 55 / 0.09);
+  --shadow-lift: 0 2px 6px rgb(31 41 55 / 0.07), 0 24px 50px -20px rgb(31 41 55 / 0.14);
+  --shadow-ring: 0 0 0 1px rgb(31 41 55 / 0.07);
+
+  /* 3D Glass & Tactile Depth Tokens */
+  --shadow-3d-card: 0 10px 30px -10px rgba(31, 41, 55, 0.09), 0 2px 6px rgba(0, 0, 0, 0.03), inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
+  --shadow-3d-hover: 0 24px 48px -10px rgba(46, 125, 50, 0.18), 0 12px 24px -6px rgba(31, 41, 55, 0.1), inset 0 1px 2px rgba(255, 255, 255, 1);
+  --shadow-3d-btn: 0 4px 0 #143d18, 0 8px 18px rgba(46, 125, 50, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  --shadow-3d-btn-active: 0 1px 0 #143d18, 0 3px 6px rgba(46, 125, 50, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-3d-glass: 0 6px 20px -4px rgba(31, 41, 55, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+@layer base {
+  *, *::before, *::after {
+    font-family: var(--font-open-sans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-style: normal !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    font-family: var(--font-open-sans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-style: normal !important;
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-open-sans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-style: normal !important;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+
+  /* Prevent mobile Safari tap-zoom */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  /* Headings: Strictly Bold Open Sans */
+  h1, h2, h3, h4, h5, h6,
+  h1 *, h2 *, h3 *, h4 *, h5 *, h6 *,
+  .font-display {
+    font-family: var(--font-open-sans), "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+  }
+
+  /* All other body text, paragraphs, lists, quotes, and content: Normal weight */
+  p, p *,
+  li,
+  dt, dd,
+  blockquote, blockquote *,
+  input, textarea, select,
+  label,
+  cite, em, i,
+  .italic {
+    font-weight: 400 !important;
+    font-style: normal !important;
+  }
+
+  /* Buttons & links: normal text, not italic */
+  button,
+  .btn,
+  a:not(h1 *, h2 *, h3 *, h4 *, h5 *, h6 *) {
+    font-style: normal !important;
+  }
+
+  ::selection {
+    background-color: var(--color-pine-200);
+    color: var(--color-pine-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-pine-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  html.text-lg-mode {
+    font-size: 115%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.65, 0.3, 1),
+    transform 0.8s cubic-bezier(0.2, 0.65, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Flip cards ---------- */
+.flip-card {
+  perspective: 1600px;
+}
+.flip-card-inner {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.3, 0.75, 0.2, 1);
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+@media (hover: hover) {
+  .flip-card:hover .flip-card-inner,
+  .flip-card:focus-within .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+@media (hover: none) {
+  .flip-face.flip-back {
+    display: none;
+  }
+}
+
+/* ---------- Utilities ---------- */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.text-stroke-white {
+  -webkit-text-stroke: 1px rgb(255 255 255 / 0.28);
+  color: transparent;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -2%, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+.animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+
+/* ---------- Article prose ---------- */
+.prose-cm p {
+  margin-bottom: 1.35rem;
+  line-height: 1.85;
+  color: var(--color-pine-900);
+}
+.prose-cm p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  line-height: 0.9;
+  padding-right: 0.6rem;
+  padding-top: 0.35rem;
+  color: var(--color-pine-700);
+}
+
+/* ---------- Urdu & RTL Typography ---------- */
+[dir="rtl"] {
+  font-family: "Noto Nastaliq Urdu", "Urdu Typesetting", "Jameel Noori Nastaleeq", "Tahoma", system-ui, sans-serif;
+  text-align: right;
+}
+
+[dir="rtl"] .font-display {
+  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Tahoma", serif;
+  letter-spacing: normal;
+}
+
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+}
+
+[dir="rtl"] .prose-cm p:first-of-type::first-letter {
+  float: none;
+  font-size: inherit;
+  padding: 0;
+}
+
+/* ==========================================================================
+   3D GLASSMORPHISM & TACTILE DEPTH SYSTEM
+   ========================================================================== */
+
+/* 1. Frosted 3D Glass Panels */
+.glass-panel-3d {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(245, 247, 250, 0.82) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 14px 36px -10px rgba(31, 41, 55, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02), inset 0 1px 1.5px rgba(255, 255, 255, 1);
+}
+
+.glass-dark-3d {
+  background: linear-gradient(145deg, rgba(13, 40, 16, 0.94) 0%, rgba(6, 26, 11, 0.98) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* 2. Interactive 3D Glass Cards */
+.glass-card-3d {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 247, 243, 0.85) 100%);
+  backdrop-filter: blur(16px) saturate(170%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px -10px rgba(31, 41, 55, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02), inset 0 1px 1.5px rgba(255, 255, 255, 1);
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+@media (hover: hover) {
+  .glass-card-3d:hover {
+    transform: translateY(-6px) scale3d(1.015, 1.015, 1.015);
+    box-shadow: 0 24px 48px -10px rgba(46, 125, 50, 0.18), 0 12px 24px -6px rgba(31, 41, 55, 0.1), inset 0 1px 2px rgba(255, 255, 255, 1);
+    border-color: rgba(46, 125, 50, 0.35);
+  }
+}
+
+/* 3. Tactile 3D Buttons (Lifts on hover, Depresses on active click) */
+.btn-3d-emerald {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(180deg, #388e3c 0%, #2E7D32 55%, #1f5e23 100%);
+  box-shadow: 0 4px 0 #143d18, 0 8px 18px rgba(46, 125, 50, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (hover: hover) {
+  .btn-3d-emerald:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #143d18, 0 14px 26px rgba(46, 125, 50, 0.45), inset 0 1px 1.5px rgba(255, 255, 255, 0.6);
+  }
+}
+
+.btn-3d-emerald:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #143d18, 0 3px 8px rgba(46, 125, 50, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* 3.1 Header Tactile Button & Navigation Micro-Animations */
+.header-tactile-btn {
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  will-change: transform, box-shadow;
+}
+
+@media (hover: hover) {
+  .header-tactile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(46, 125, 50, 0.22), 0 2px 4px rgba(31, 41, 55, 0.05);
+  }
+}
+
+.header-tactile-btn:active {
+  transform: translateY(1.5px) scale(0.98) !important;
+  box-shadow: 0 1px 2px rgba(31, 41, 55, 0.1) !important;
+}
+
+.header-tactile-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #2E7D32, 0 4px 12px -2px rgba(46, 125, 50, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-tactile-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+  .header-tactile-btn:hover,
+  .header-tactile-btn:active {
+    transform: none !important;
+  }
+}
+
+/* 3.2 Premium Heading Highlights */
+.heading-accent {
+  position: relative;
+  display: inline-block;
+  color: #1e6b24;
+  font-weight: inherit;
+  z-index: 1;
+}
+
+.heading-accent::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: 3px;
+  height: 7px;
+  background: linear-gradient(90deg, rgba(46, 125, 50, 0.22) 0%, rgba(212, 175, 55, 0.26) 100%);
+  border-radius: 4px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.heading-accent-gold {
+  position: relative;
+  display: inline-block;
+  color: #fde68a;
+  font-weight: inherit;
+  z-index: 1;
+}
+
+.heading-accent-gold::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: 3px;
+  height: 6px;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.45) 0%, rgba(254, 243, 199, 0.2) 100%);
+  border-radius: 4px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Floating Action Elements (Strictly Viewport-Fixed on Right Side) */
+.floating-bottom-right-btn {
+  position: fixed !important;
+  right: 24px !important;
+  left: auto !important;
+}
+
+
+
+
+.btn-3d-glass {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #1F2937;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(238, 247, 241, 0.88) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(46, 125, 50, 0.22);
+  box-shadow: 0 3px 0 rgba(31, 41, 55, 0.08), 0 6px 16px rgba(31, 41, 55, 0.06), inset 0 1px 1px rgba(255, 255, 255, 1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (hover: hover) {
+  .btn-3d-glass:hover {
+    transform: translateY(-2px);
+    border-color: rgba(46, 125, 50, 0.45);
+    box-shadow: 0 5px 0 rgba(46, 125, 50, 0.16), 0 10px 22px rgba(46, 125, 50, 0.14), inset 0 1px 1.5px rgba(255, 255, 255, 1);
+    color: #2E7D32;
+  }
+}
+
+.btn-3d-glass:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 rgba(31, 41, 55, 0.06), inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-3d-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #0d2810;
+  background: linear-gradient(180deg, #fbf2d5 0%, #d4af37 60%, #b89325 100%);
+  box-shadow: 0 4px 0 #8b6e16, 0 8px 18px rgba(212, 175, 55, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (hover: hover) {
+  .btn-3d-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #8b6e16, 0 14px 26px rgba(212, 175, 55, 0.45), inset 0 1px 1.5px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.btn-3d-gold:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #8b6e16, 0 3px 8px rgba(212, 175, 55, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* 4. Glass Light Reflection Sweep */
+.glass-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-sheen::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 58%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (hover: hover) {
+  .glass-sheen:hover::after {
+    transform: translateX(100%) rotate(25deg);
+  }
+}
+
+/* 5. 3D Beveled Input Fields */
+.glass-input-3d {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(31, 41, 55, 0.15);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.glass-input-3d:focus {
+  border-color: #2E7D32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2), inset 0 1px 2px rgba(255, 255, 255, 1);
+  outline: none;
+}
+
+/* 6. 3D Danger Tactile Button */
+.btn-3d-danger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(180deg, #dc2626 0%, #b91c1c 60%, #991b1b 100%);
+  box-shadow: 0 4px 0 #7f1d1d, 0 8px 18px rgba(185, 28, 28, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (hover: hover) {
+  .btn-3d-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #7f1d1d, 0 14px 26px rgba(185, 28, 28, 0.45), inset 0 1px 1.5px rgba(255, 255, 255, 0.6);
+  }
+}
+
+.btn-3d-danger:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #7f1d1d, 0 3px 8px rgba(185, 28, 28, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* 7. 3D Image Glass Frame with Specular Reflection */
+.image-3d-frame {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 6px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(232, 242, 236, 0.8) 100%);
+  box-shadow: 0 16px 36px -12px rgba(31, 41, 55, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04), inset 0 1.5px 2px rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+}
+
+@media (hover: hover) {
+  .image-3d-frame:hover {
+    transform: translateY(-4px) scale3d(1.01, 1.01, 1.01);
+    box-shadow: 0 24px 50px -10px rgba(46, 125, 50, 0.2), 0 8px 18px rgba(31, 41, 55, 0.08), inset 0 2px 2px rgba(255, 255, 255, 1);
+  }
+}
+
+.image-3d-frame img {
+  border-radius: 0.95rem;
+}
+
+/* 8. 3D Embossed Icon Containers */
+.icon-box-3d {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  background: linear-gradient(145deg, #ffffff 0%, #edf3ef 100%);
+  box-shadow: 0 6px 14px -3px rgba(31, 41, 55, 0.1), 0 2px 4px rgba(0, 0, 0, 0.02), inset 0 1px 1.5px rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+@media (hover: hover) {
+  .icon-box-3d:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 20px -4px rgba(46, 125, 50, 0.22), inset 0 1px 1.5px rgba(255, 255, 255, 1);
+  }
+}
+
+.icon-box-3d.hidden,
+.group:hover .icon-box-3d.hidden {
+  display: none !important;
+}
+
+.group:hover .icon-box-3d[class*="group-hover:bg-"] {
+  background-image: none !important;
+}
+
+/* 8.1 3D Pathway Floating Action Cards & Dynamic Green Upper Hover */
+.pathway-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+}
+
+.pathway-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: radial-gradient(circle at 50% 0%, rgba(46, 125, 50, 0.16) 0%, transparent 75%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.pathway-card:hover::before {
+  opacity: 1;
+}
+
+.pathway-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  background: linear-gradient(145deg, #ffffff 0%, #edf3ef 100%);
+  box-shadow: 0 6px 14px -3px rgba(31, 41, 55, 0.1), 0 2px 4px rgba(0, 0, 0, 0.02), inset 0 1px 1.5px rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  color: #2E7D32;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pathway-card:hover .pathway-icon-box,
+.group:hover .pathway-icon-box {
+  background: linear-gradient(145deg, #2E7D32 0%, #1b5e20 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px -3px rgba(46, 125, 50, 0.55), 0 4px 10px rgba(0, 0, 0, 0.12), inset 0 1px 1.5px rgba(255, 255, 255, 0.45) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  transform: scale(1.12) translateY(-2px);
+}
+
+.pathway-card:hover .pathway-icon-box svg,
+.group:hover .pathway-icon-box svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* 9. 3D Floating Modal Container */
+.modal-3d {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 248, 246, 0.95) 100%);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 28px 70px -15px rgba(15, 30, 20, 0.28), 0 10px 24px -5px rgba(0, 0, 0, 0.08), inset 0 1.5px 2px rgba(255, 255, 255, 1);
+  border-radius: 1.5rem;
+}
+
+/* 10. 3D Interactive Tab Pill */
+.tab-3d {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-3d[data-active="true"] {
+  background: linear-gradient(180deg, #388e3c 0%, #2E7D32 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.tab-3d[data-active="false"]:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(31, 41, 55, 0.06);
+  transform: translateY(-1px);
+}
+
+/* 11. 3D Perspective Flip Card Styles & Continuous Sliding Marquee */
+@keyframes priorities-marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.priorities-slide-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  will-change: transform;
+  animation: priorities-marquee-scroll 32s linear infinite;
+}
+
+/* Pause sliding ONLY when a card is hovered */
+.priorities-slide-track:has(.priority-flip-card:hover),
+.priorities-slide-track.is-paused {
+  animation-play-state: paused !important;
+}
+
+/* 3D Flip Card Container */
+.priority-flip-card {
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* 3D Flipper Inner */
+.priority-flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 1.25rem;
+}
+
+/* Hover or is-flipped rotates 180deg in 3D */
+.priority-flip-card:hover .priority-flip-card-inner,
+.priority-flip-card.is-flipped .priority-flip-card-inner {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+/* Faces */
+.priority-face-front,
+.priority-face-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.25rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Front Face */
+.priority-face-front {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Back Face */
+.priority-face-back {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  z-index: 1;
+  background-color: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* On Card Hover: Front face fades out, Back face becomes 100% visible */
+.priority-flip-card:hover .priority-face-front,
+.priority-flip-card.is-flipped .priority-face-front {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.priority-flip-card:hover .priority-face-back,
+.priority-flip-card.is-flipped .priority-face-back {
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 10 !important;
+}
+
+/* Hide scrollbars */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Clean High-Legibility Text (No Black Stroke or Outline) */
+.text-outline-black {
+  -webkit-text-stroke: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.text-outline-sm-black {
+  -webkit-text-stroke: 0;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.text-outline-xs-black {
+  -webkit-text-stroke: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* Continuous Circular Rotating Logo Animation ("gol gol ghumta rahe") */
+@keyframes logo-spin-continuous {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes logo-spin-continuous {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.logo-spin-continuous,
+.rotating-logo-spin {
+  -webkit-animation: logo-spin-continuous 7s linear infinite !important;
+  animation: logo-spin-continuous 7s linear infinite !important;
+  transform-origin: center center !important;
+  -webkit-transform-origin: center center !important;
+  will-change: transform !important;
+  display: inline-flex !important;
+}
+
+/* 3D Y-Axis Rotation for Logo ("3D Y-Axis Rotation") */
+@keyframes logo-spin-3d {
+  0% {
+    -webkit-transform: perspective(600px) rotateY(0deg);
+    transform: perspective(600px) rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: perspective(600px) rotateY(360deg);
+    transform: perspective(600px) rotateY(360deg);
+  }
+}
+
+@-webkit-keyframes logo-spin-3d {
+  0% {
+    -webkit-transform: perspective(600px) rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: perspective(600px) rotateY(360deg);
+  }
+}
+
+.logo-spin-3d {
+  -webkit-animation: logo-spin-3d 6s linear infinite !important;
+  animation: logo-spin-3d 6s linear infinite !important;
+  transform-origin: center center !important;
+  -webkit-transform-origin: center center !important;
+  transform-style: preserve-3d !important;
+  -webkit-transform-style: preserve-3d !important;
+  will-change: transform !important;
+  display: inline-flex !important;
+}
+
+.perspective-600 {
+  perspective: 600px !important;
+  -webkit-perspective: 600px !important;
+}
+
+/* ==========================================================================
+   FLUID 3D PERSPECTIVE & HARDWARE-ACCELERATED ANIMATION SYSTEM
+   Keeps 3D effects fluid, prevents horizontal overflow with relative units,
+   and adapts perspective on small screens without conflicting with Tailwind.
+   ========================================================================== */
+
+/* 1. Mobile & Tablet 3D Perspective Scaling */
+@media screen and (max-width: 768px) {
+  .perspective-600,
+  .stage-3d {
+    perspective: 500px !important;
+    -webkit-perspective: 500px !important;
+  }
+
+  .priority-flip-card {
+    perspective: 700px !important;
+    -webkit-perspective: 700px !important;
+  }
+
+  /* Subtler transforms on mobile to avoid edge clipping */
+  .glass-card-3d:hover {
+    transform: translateY(-2px) scale3d(1.008, 1.008, 1.008) !important;
+  }
+
+  .image-3d-frame:hover {
+    transform: translateY(-2px) scale3d(1.005, 1.005, 1.005) !important;
+  }
+}
+
+/* 2. Touch Screen & Pointer Device Adaptations */
+@media (hover: none) and (pointer: coarse) {
+  /* Prevent sticky hover translation on touch screens */
+  .glass-card-3d:hover,
+  .pathway-card:hover,
+  .image-3d-frame:hover,
+  .icon-box-3d:hover {
+    transform: none !important;
+  }
+
+  /* Tactile active feedback for touch taps */
+  .btn-3d-emerald:active,
+  .btn-3d-glass:active,
+  .btn-3d-gold:active,
+  .btn-3d-danger:active {
+    transform: scale(0.97) translateY(2px) !important;
+  }
+
+  .glass-card-3d:active,
+  .pathway-card:active {
+    transform: scale(0.99) !important;
+  }
+
+  /* Tap toggles 3D flip card */
+  .priority-flip-card.is-flipped .priority-flip-card-inner {
+    transform: rotateY(180deg) !important;
+    -webkit-transform: rotateY(180deg) !important;
+  }
+
+  /* Ensure accessible tap target height */
+  a,
+  button,
+  input,
+  select {
+    min-height: 42px;
+    touch-action: manipulation;
+  }
+
+  /* Disable sheen sweep on mobile to save battery */
+  .glass-sheen::after {
+    display: none !important;
+  }
+}
+
+/* 3. Official Print Styles */
+@media print {
+  header,
+  footer,
+  aside,
+  nav,
+  button,
+  .btn-3d-emerald,
+  .btn-3d-glass,
+  .btn-3d-gold,
+  .btn-3d-danger,
+  .priorities-slide-track,
+  .grain::before {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
+    page-break-after: avoid;
+  }
+
+  p, article, .prose-cm {
+    color: #111111 !important;
+    orphans: 3;
+    widows: 3;
+  }
+
+  a {
+    text-decoration: underline !important;
+    color: #000000 !important;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* Ensure desktop action buttons strictly hide on mobile, tablet & iPad */
+@media screen and (max-width: 1279px) {
+  .header-desktop-actions {
+    display: none !important;
+  }
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,332 @@
+// Prisma Schema for Chief Minister of Balochistan Official Portal
+// Architecture: Next.js App Router Full-Stack with SQL Database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// -------------------------------------------------------------
+// 1. AUTHENTICATION & ACCESS CONTROL
+// -------------------------------------------------------------
+
+enum Role {
+  SUPER_ADMIN
+  EDITOR
+  GRIEVANCE_OFFICER
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         Role      @default(EDITOR)
+  active       Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  sessions            Session[]
+  assignedComplaints  ComplaintAssignment[]
+  statusChanges       ComplaintStatusHistory[]
+  auditLogs           AuditLog[]
+
+  @@index([email])
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
+// -------------------------------------------------------------
+// 2. CONFIGURATION & CORE CONTENT
+// -------------------------------------------------------------
+
+model WebsiteSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  valueEn   String
+  valueUr   String?
+  category  String   @default("general") // general, contact, social, portal
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
+
+model ChiefMinisterProfile {
+  id                 String   @id @default(uuid())
+  nameEn             String
+  nameUr             String?
+  titleEn            String
+  titleUr            String?
+  welcomeMessageEn   String
+  welcomeMessageUr   String?
+  quoteEn            String
+  quoteUr            String?
+  bioParagraphsEn    String   // JSON array of paragraphs
+  bioParagraphsUr    String?  // JSON array of Urdu paragraphs
+  photoUrl           String
+  inOfficeSince      String
+  party              String
+  assembly           String
+  residence          String
+  termLength         String
+  active             Boolean  @default(true)
+  updatedAt          DateTime @updatedAt
+}
+
+model VisionMission {
+  id         String   @id @default(uuid())
+  visionEn   String
+  visionUr   String?
+  missionEn  String
+  missionUr  String?
+  updatedAt  DateTime @updatedAt
+}
+
+model Priority {
+  id               String   @id @default(uuid())
+  slug             String   @unique
+  titleEn          String
+  titleUr          String?
+  shortEn          String
+  shortUr          String?
+  descriptionEn    String
+  descriptionUr    String?
+  icon             String
+  initiativesJson  String   // JSON array of bullet initiatives
+  sortOrder        Int      @default(0)
+  isFirstDay       Boolean  @default(false) // Section 1.4 Immediate Action Priorities
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([slug])
+  @@index([sortOrder])
+}
+
+model Initiative {
+  id               String   @id @default(uuid())
+  titleEn          String
+  titleUr          String?
+  category         String   // Green Bus, Transport, Healthcare, Education, Digital Governance, Infrastructure
+  descriptionEn    String
+  descriptionUr    String?
+  status           String   @default("Active") // Planned, Active, Completed
+  progressPercent  Int      @default(0)
+  featured         Boolean  @default(false)
+  sortOrder        Int      @default(0)
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([category])
+  @@index([featured])
+}
+
+model CabinetMember {
+  id             String   @id @default(uuid())
+  nameEn         String
+  nameUr         String?
+  designationEn  String
+  designationUr  String?
+  portfolioEn    String
+  portfolioUr    String?
+  ministryEn     String
+  ministryUr     String?
+  photoUrl       String?
+  profileEn      String?
+  profileUr      String?
+  departmentUrl  String?
+  sortOrder      Int      @default(0)
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+model FormerChiefMinister {
+  id         String   @id @default(uuid())
+  nameEn     String
+  nameUr     String?
+  partyEn    String
+  partyUr    String?
+  fromDate   String
+  toDate     String
+  bioEn      String?
+  bioUr      String?
+  photoUrl   String?
+  note       String?
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+// -------------------------------------------------------------
+// 3. NEWS & MEDIA MANAGEMENT
+// -------------------------------------------------------------
+
+model NewsArticle {
+  id            String   @id @default(uuid())
+  slug          String   @unique
+  titleEn       String
+  titleUr       String?
+  excerptEn     String
+  excerptUr     String?
+  bodyEn        String
+  bodyUr        String?
+  category      String   // Official Meetings, Press Releases, Policy Announcements, Development Projects, Public Welfare Initiatives, Speeches and Statements, Visits and Events
+  coverImageUrl String?
+  publishedDate DateTime @default(now())
+  readTime      String   @default("3 min read")
+  isPublished   Boolean  @default(true)
+  isFeatured    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([slug])
+  @@index([category])
+  @@index([isPublished])
+  @@index([publishedDate])
+}
+
+model MediaAsset {
+  id        String   @id @default(uuid())
+  title     String
+  fileUrl   String
+  fileType  String
+  fileSize  Int
+  category  String   @default("general") // photos, documents, videos, press
+  createdAt DateTime @default(now())
+
+  @@index([category])
+}
+
+// -------------------------------------------------------------
+// 4. CITIZEN GRIEVANCE REDRESSAL MECHANISM (GRM)
+// -------------------------------------------------------------
+
+enum ComplaintStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model Complaint {
+  id              String          @id @default(uuid())
+  trackingCode    String          @unique // e.g. CMB-2026-XXXX
+  citizenName     String
+  citizenPhone    String
+  citizenEmail    String?
+  district        String
+  category        String          // Healthcare, Education, Water, Roads, Electricity, etc.
+  department      String?
+  description     String
+  attachmentUrl   String?
+  status          ComplaintStatus @default(SUBMITTED)
+  priorityLevel   String          @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
+  resolutionNotes String?
+  resolvedAt      DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  assignments     ComplaintAssignment[]
+  statusHistory   ComplaintStatusHistory[]
+  feedback        ComplaintFeedback?
+
+  @@index([trackingCode])
+  @@index([status])
+  @@index([district])
+  @@index([category])
+  @@index([createdAt])
+}
+
+model ComplaintAssignment {
+  id                 String    @id @default(uuid())
+  complaintId        String
+  complaint          Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  assignedDepartment String
+  assignedOfficerId  String?
+  officer            User?     @relation(fields: [assignedOfficerId], references: [id], onDelete: SetNull)
+  notes              String?
+  assignedAt         DateTime  @default(now())
+
+  @@index([complaintId])
+  @@index([assignedOfficerId])
+}
+
+model ComplaintStatusHistory {
+  id             String    @id @default(uuid())
+  complaintId    String
+  complaint      Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  previousStatus String?
+  newStatus      String
+  changedById    String?
+  changedBy      User?     @relation(fields: [changedById], references: [id], onDelete: SetNull)
+  comments       String?
+  createdAt      DateTime  @default(now())
+
+  @@index([complaintId])
+  @@index([changedById])
+}
+
+model ComplaintFeedback {
+  id          String    @id @default(uuid())
+  complaintId String    @unique
+  complaint   Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  rating      Int       // 1 to 5 stars
+  comments    String?
+  submittedAt DateTime  @default(now())
+}
+
+// -------------------------------------------------------------
+// 5. PUBLIC INQUIRIES & AUDIT LOGS
+// -------------------------------------------------------------
+
+model ContactInquiry {
+  id        String    @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  status    String    @default("UNREAD") // UNREAD, REVIEWED, REPLIED
+  repliedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String   // CREATE, UPDATE, DELETE, LOGIN, LOGOUT, ASSIGN, RESOLVE
+  entity    String   // NewsArticle, Complaint, CabinetMember, etc.
+  entityId  String?
+  details   String?  // JSON string of changes
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([entity])
+  @@index([createdAt])
+}
