@@ -248,9 +248,12 @@ function getDbInstance(): DatabaseSync {
     const rawDb = new DatabaseSync(dbPath);
     try {
       rawDb.exec("PRAGMA busy_timeout = 10000;");
-      rawDb.exec("PRAGMA journal_mode = DELETE;");
+      rawDb.exec("PRAGMA journal_mode = WAL;");
       rawDb.exec("PRAGMA synchronous = NORMAL;");
       rawDb.exec("PRAGMA foreign_keys = ON;");
+      rawDb.exec("PRAGMA temp_store = MEMORY;");
+      rawDb.exec("PRAGMA cache_size = -64000;");
+      rawDb.exec("PRAGMA mmap_size = 268435456;");
     } catch {
       // PRAGMA settings applied
     }

@@ -647,7 +647,7 @@ export function ConnectHub({ initialTab = "complaint" }: { initialTab?: "complai
                   Track Your Grievance on Official GRM Portal
                 </h4>
                 <p className="mt-1 text-xs text-white/75 max-w-xl">
-                  Already have an AWAAZ ticket number from grmbalochistan.com or the 24/7 hotline (081-9202424)? Open the official tracker for live department milestones.
+                  Already have an AWAAZ ticket number from grmbalochistan.com or the 24/7 hotline (1160)? Open the official tracker for live department milestones.
                 </p>
               </div>
               <a

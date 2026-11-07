@@ -54,7 +54,7 @@ const faqs = [
   },
   {
     q: "What should I do if a public service grievance is urgent?",
-    a: "For immediate public emergencies (hospital emergencies, broken electrical cables, active flood damage), citizens should immediately call the 24/7 hotline at 081-9202424 or contact the local District Commissioner's Control Room.",
+    a: "For immediate public emergencies (hospital emergencies, broken electrical cables, active flood damage), citizens should immediately call the 24/7 hotline at 1160 or contact the local District Commissioner's Control Room.",
   },
   {
     q: "What happens if a department marks my grievance resolved but the issue is not fixed?",

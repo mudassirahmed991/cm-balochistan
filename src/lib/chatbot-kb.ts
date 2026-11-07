@@ -58,9 +58,9 @@ export const governmentKnowledgeBase: KnowledgeItem[] = [
     title: "Public Grievance Redressal (AWAAZ / GRM Balochistan)",
     keywords: ["complaint", "track complaint", "grm", "awaaz", "helpline", "grievance", "contact cm", "شکایت", "ہیلپ لائن"],
     contentEn:
-      "Citizens can submit official complaints directly to the Chief Minister Grievance Redressal Mechanism (AWAAZ):\n- Official Portal: https://grmbalochistan.com\n- 24/7 Citizen Helpline: 081-9202424\n- CM Secretariat Address: Chief Minister House, Zarghoon Road, Quetta\n- Official Email: info@cm.balochistan.gob.pk\nComplaints receive a unique tracking ID and are monitored until resolution by provincial administrative secretaries.",
+      "Citizens can submit official complaints directly to the Chief Minister Grievance Redressal Mechanism (AWAAZ):\n- Official Portal: https://grmbalochistan.com\n- 24/7 Citizen Helpline: 1160\n- CM Secretariat Address: Chief Minister House, Zarghoon Road, Quetta\n- Official Email: info@cm.balochistan.gob.pk\nComplaints receive a unique tracking ID and are monitored until resolution by provincial administrative secretaries.",
     contentUr:
-      "عوام الناس وزیر اعلیٰ شکایات سیل (آواز - AWAAZ) کے ذریعے اپنی شکایات درج کروا سکتے ہیں:\n- آن لائن پورٹل: https://grmbalochistan.com\n- 24/7 ہیلپ لائن: 081-9202424\n- پتہ: چیف منسٹر ہاؤس، زرغون روڈ، کوئٹہ\n- ای میل: info@cm.balochistan.gob.pk",
+      "عوام الناس وزیر اعلیٰ شکایات سیل (آواز - AWAAZ) کے ذریعے اپنی شکایات درج کروا سکتے ہیں:\n- آن لائن پورٹل: https://grmbalochistan.com\n- 24/7 ہیلپ لائن: 1160\n- پتہ: چیف منسٹر ہاؤس، زرغون روڈ، کوئٹہ\n- ای میل: info@cm.balochistan.gob.pk",
     sourceTitle: "CM Grievance Redressal Portal",
     sourceUrl: "https://grmbalochistan.com",
   },

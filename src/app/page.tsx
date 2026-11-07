@@ -562,11 +562,11 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
                   <a
-                    href="tel:0819202424"
+                    href="tel:1160"
                     className="inline-flex items-center gap-1.5 font-bold text-pine-950 hover:text-pine-700"
                   >
                     <span>24/7 Helpline:</span>
-                    <span className="font-mono text-emerald-800">081-9202424</span>
+                    <span className="font-mono text-emerald-800">1160</span>
                   </a>
                 </div>
               </div>

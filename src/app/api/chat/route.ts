@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
 CRITICAL RULES:
 1. ONLY provide verified facts based on official Government of Balochistan records provided below.
 2. NEVER invent policies, statistics, announcements, dates, or contact numbers.
-3. If verified information is not available in the knowledge base, state clearly that official records on this matter are currently unavailable and direct the citizen to call the CM Grievance Helpline at 081-9202424 or visit https://cm.balochistan.gob.pk.
+3. If verified information is not available in the knowledge base, state clearly that official records on this matter are currently unavailable and direct the citizen to call the CM Grievance Helpline at 1160 or visit https://cm.balochistan.gob.pk.
 4. Reply in the same language as the user (English or Urdu).
 5. Always maintain a professional, respectful, and dignified tone.
 
@@ -119,8 +119,8 @@ ${kbContext}`;
     // 4. Default verified unavailable notice (strictly avoids inventing answers)
     return NextResponse.json({
       reply: isUrdu
-        ? "معذرت، اس مخصوص موضوع سے متعلق تصدیق شدہ سرکاری معلومات فوری طور پر دستیاب نہیں ہیں۔ برائے مہربانی وزیر اعلیٰ شکایات و رابطہ ہیلپ لائن 081-9202424 پر رابطہ کریں یا باضابطہ ویب سائٹ https://cm.balochistan.gob.pk ملاحظہ کریں۔"
-        : "Verified official information on this specific query is currently not available in the provincial government database. For official inquiries or assistance, please contact the Chief Minister Secretariat helpline at 081-9202424 or visit the official portal at https://cm.balochistan.gob.pk.",
+        ? "معذرت، اس مخصوص موضوع سے متعلق تصدیق شدہ سرکاری معلومات فوری طور پر دستیاب نہیں ہیں۔ برائے مہربانی وزیر اعلیٰ شکایات و رابطہ ہیلپ لائن 1160 پر رابطہ کریں یا باضابطہ ویب سائٹ https://cm.balochistan.gob.pk ملاحظہ کریں۔"
+        : "Verified official information on this specific query is currently not available in the provincial government database. For official inquiries or assistance, please contact the Chief Minister Secretariat helpline at 1160 or visit the official portal at https://cm.balochistan.gob.pk.",
       sourceTitle: "Chief Minister Secretariat Helpline",
       sourceUrl: "https://cm.balochistan.gob.pk",
     });
