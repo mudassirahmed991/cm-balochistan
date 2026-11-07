@@ -58,8 +58,7 @@ export function AdminLoginForm() {
             name="email"
             type="email"
             required
-            autoComplete="email"
-            defaultValue="admin@balochistan.gov.pk"
+            autoComplete="off"
             placeholder="officer@balochistan.gov.pk"
             className="w-full rounded-xl glass-input-3d pl-11 pr-4 py-3.5 text-xs sm:text-sm text-pine-950 placeholder:text-pine-900/35"
           />
@@ -79,8 +78,7 @@ export function AdminLoginForm() {
             name="password"
             type="password"
             required
-            autoComplete="current-password"
-            defaultValue="Admin@Balochistan2026!"
+            autoComplete="new-password"
             placeholder="••••••••••••••••"
             className="w-full rounded-xl glass-input-3d pl-11 pr-4 py-3.5 text-xs sm:text-sm text-pine-950 placeholder:text-pine-900/35"
           />

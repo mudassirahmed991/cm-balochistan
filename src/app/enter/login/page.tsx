@@ -52,16 +52,6 @@ export default async function AdminLoginPage() {
             </div>
           </div>
         </div>
-
-        {/* Demo credentials callout */}
-        <div className="mt-6 rounded-2xl glass-panel-3d p-4 text-center text-xs text-pine-900/70 border border-white/90 shadow-sm">
-          <p className="font-bold text-pine-950 mb-1">Seeded Administrative Credentials:</p>
-          <div className="font-mono text-[11px] space-y-0.5">
-            <p><span className="text-pine-600 font-semibold">Super Admin:</span> admin@balochistan.gov.pk / Admin@Balochistan2026!</p>
-            <p><span className="text-pine-600 font-semibold">Editor:</span> editor@balochistan.gov.pk / Editor@Balochistan2026!</p>
-            <p><span className="text-pine-600 font-semibold">Grievance:</span> grievance@balochistan.gov.pk / Grievance@Balochistan2026!</p>
-          </div>
-        </div>
       </div>
     </div>
   );
