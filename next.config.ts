@@ -51,6 +51,13 @@ const nextConfig: NextConfig = {
   // 1. Remove X-Powered-By header to prevent tech stack fingerprinting
   poweredByHeader: false,
 
+  // 2. Enable Gzip/Brotli compression & next/image AVIF/WebP auto-conversion
+  compress: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 86400,
+  },
+
   // 2. Strict HTTP Security Headers for all routes
   async headers() {
     return [
