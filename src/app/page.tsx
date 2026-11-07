@@ -55,7 +55,7 @@ export default function HomePage() {
         reformTasks: staticMatch?.reformTasks || [],
         icon: p.icon,
         iconImage: p.iconImage || staticMatch?.iconImage || `/images/priorities/${p.slug}.png`,
-        bgImage: p.bgImage || staticMatch?.bgImage || `/images/priorities/${p.slug}-bg.jpg`,
+        bgImage: p.bgImage || staticMatch?.bgImage || `/images/priorities/${p.slug}-2026.jpg`,
         status: "Active Implementation",
       };
     });

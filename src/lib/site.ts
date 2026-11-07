@@ -118,7 +118,7 @@ export const firstDayPriorities = [
     ],
     icon: "landmark",
     iconImage: "/images/priorities/good-governance.png",
-    bgImage: "/images/priorities/good-governance-bg.jpg",
+    bgImage: "/images/priorities/good-governance-2026.jpg",
     status: "Active Implementation",
   },
   {
@@ -136,7 +136,7 @@ export const firstDayPriorities = [
     ],
     icon: "shield",
     iconImage: "/images/priorities/law-order.png",
-    bgImage: "/images/priorities/law-order-bg.jpg",
+    bgImage: "/images/priorities/law-order-2026.jpg",
     status: "Priority Focus",
   },
   {
@@ -154,7 +154,7 @@ export const firstDayPriorities = [
     ],
     icon: "heart",
     iconImage: "/images/priorities/health-education.png",
-    bgImage: "/images/priorities/health-education-bg.jpg",
+    bgImage: "/images/priorities/health-education-2026.jpg",
     status: "Directly Monitored",
   },
   {
@@ -172,7 +172,7 @@ export const firstDayPriorities = [
     ],
     icon: "globe",
     iconImage: "/images/priorities/service-delivery.png",
-    bgImage: "/images/priorities/service-delivery-bg.jpg",
+    bgImage: "/images/priorities/service-delivery-2026.jpg",
     status: "Rapid Rollout",
   },
   {
@@ -190,7 +190,7 @@ export const firstDayPriorities = [
     ],
     icon: "compass",
     iconImage: "/images/priorities/infrastructure.png",
-    bgImage: "/images/priorities/infrastructure-bg.jpg",
+    bgImage: "/images/priorities/infrastructure-2026.jpg",
     status: "High Priority",
   },
   {
@@ -208,7 +208,7 @@ export const firstDayPriorities = [
     ],
     icon: "trending",
     iconImage: "/images/priorities/employment.png",
-    bgImage: "/images/priorities/employment-bg.jpg",
+    bgImage: "/images/priorities/employment-2026.jpg",
     status: "Active Program",
   },
   {
@@ -226,7 +226,7 @@ export const firstDayPriorities = [
     ],
     icon: "message",
     iconImage: "/images/priorities/grm-priority.png",
-    bgImage: "/images/priorities/grm-priority-bg.jpg",
+    bgImage: "/images/priorities/grm-priority-2026.jpg",
     status: "Operational",
   },
   {
@@ -244,7 +244,7 @@ export const firstDayPriorities = [
     ],
     icon: "shield",
     iconImage: "/images/priorities/accountability.png",
-    bgImage: "/images/priorities/accountability-bg.jpg",
+    bgImage: "/images/priorities/accountability-2026.jpg",
     status: "Enforced",
   },
 ];
