@@ -56,6 +56,13 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 86400,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cm.balochistan.gob.pk",
+        pathname: "/wp-content/uploads/**",
+      },
+    ],
   },
 
   // 2. Strict HTTP Security Headers for all routes

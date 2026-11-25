@@ -35,6 +35,8 @@ import { CMCardStack } from "@/components/cm-card-stack";
 
 import { db, type DBGalleryItem } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   let displayPriorities = firstDayPriorities;
   let displayInitiatives = coreInitiatives;

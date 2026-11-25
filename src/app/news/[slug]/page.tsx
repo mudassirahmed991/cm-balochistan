@@ -169,8 +169,8 @@ export default async function NewsDetailPage({ params }: Props) {
             </div>
 
             <div className="prose-cm mt-8">
-              {item.body.map((paragraph) => (
-                <p key={paragraph.slice(0, 30)}>{paragraph}</p>
+              {item.body.map((paragraph, idx) => (
+                <p key={`${idx}-${paragraph.slice(0, 24)}`}>{paragraph}</p>
               ))}
             </div>
 
@@ -233,9 +233,12 @@ export default async function NewsDetailPage({ params }: Props) {
             </Link>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
-            {related.map((entry) => (
+            {related.map((entry, idx) => (
               <Reveal key={entry.slug}>
-                <NewsCard item={entry} index={news.findIndex((n) => n.slug === entry.slug)} />
+                <NewsCard
+                  item={entry}
+                  index={Math.max(0, allArticles.findIndex((a) => a.slug === entry.slug)) || idx + 1}
+                />
               </Reveal>
             ))}
           </div>

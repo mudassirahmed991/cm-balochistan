@@ -6,12 +6,20 @@ import { NewsList } from "@/components/news-list";
 import { Reveal } from "@/components/reveal";
 import { Container, Eyebrow, PageHero } from "@/components/ui";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "News Updates | Chief Minister of Balochistan",
   description: "Official press releases, announcements and stories of progress from the Office of the Chief Minister of Balochistan.",
 };
 
-export default function NewsPage() {
+export default async function NewsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ category?: string }>;
+}) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const initialCategory = resolvedSearchParams?.category || "All";
   let displayNews: typeof fallbackNews = [];
 
   try {
@@ -69,7 +77,7 @@ export default function NewsPage() {
       <section className="py-10 sm:py-16 md:py-20">
         <Container>
           <Reveal>
-            <NewsList items={displayNews} />
+            <NewsList items={displayNews} initialCategory={initialCategory} />
           </Reveal>
         </Container>
       </section>
